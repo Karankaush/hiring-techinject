@@ -37,9 +37,8 @@ bcryptjs for password hashing
 dotenv for environment variables
 
 ⚙️ Installation & Setup
-1️⃣ Clone the repo
-git clone https://github.com/your-username/wellness-tracker-backend.git
-cd wellness-tracker-backend
+1
+cd wellness tracker
 
 2️⃣ Install dependencies
 npm install
@@ -54,15 +53,11 @@ JWT_SECRET=ksue$dcncdis
 ADMIN_CODE=jdbyd$fof$k
 
 
-// not shared
-JWT_SECRET=
-// not shared
-ADMIN_CODE=
+
 
 4️⃣ Start the server
-npm run dev   # with nodemon
-# OR
-npm start
+nodemon server.js
+
 
 
 Server will run on 👉 http://localhost:5000
