@@ -1,0 +1,298 @@
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+
+
+
+
+openapi: 3.0.0
+info:
+  title: Wellness Tracker API
+  version: 1.0.0
+  description: API documentation for Wellness Tracker project
+
+servers:
+  - url: http://localhost:5000/api
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Auth
+    description: Authentication APIs
+  - name: Wellness
+    description: Wellness tracking APIs
+  - name: Admin
+    description: Admin-only APIs
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: User registered successfully
+        '400':
+          description: User already exists
+
+  /auth/login:
+    post:
+      summary: Login a user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  example: ""
+                password:
+                  type: string
+                  example: ""
+      responses:
+        '200':
+          description: Successful login with JWT token
+        '400':
+          description: Invalid credentials
+
+  /auth/register-admin:
+    post:
+      summary: Register an admin (requires ADMIN_CODE)
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, adminCode]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                adminCode:
+                  type: string
+      responses:
+        '201':
+          description: Admin registered successfully
+        '403':
+          description: Invalid admin code
+
+
+
+  
+
+  /wellness:
+    post:
+      summary: Create a wellness log
+      tags: [Wellness]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [steps, sleepHours, mood, notes]
+              properties:
+                steps:
+                  type: number
+                sleepHours:
+                  type: number
+                mood:
+                  type: string
+                notes:
+                  type: string
+      responses:
+        '201':
+          description: Log created successfully
+    get:
+      summary: Get all wellness logs for the user
+      tags: [Wellness]
+      responses:
+        '200':
+          description: Log created successfully
+
+
+ 
+
+  /wellness:
+    get:
+      summary: Get all wellness log
+      tags: [Wellness]
+      responses:
+        '201':
+          description: Log created successfully
+    get:
+      summary: Get all wellness logs for the user
+      tags: [Wellness]
+      responses:
+        '200':
+          description: List of logs
+
+
+
+
+
+
+
+
+
+
+
+
+
+  paths:
+  /wellness/{id}:
+    put:
+      summary: Update a wellness log
+      tags: [Wellness]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mood:
+                  type: string
+                  example: happy
+                sleepHours:
+                  type: number
+                  example: 7
+                exerciseMinutes:
+                  type: number
+                  example: 45
+                notes:
+                  type: string
+                  example: "Felt energetic today"
+      responses:
+        '200':
+          description: Log updated successfully
+        '404':
+          description: Log not found
+
+    delete:
+      summary: Delete a wellness log
+      tags: [Wellness]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Log deleted successfully
+        '404':
+          description: Log not found
+
+
+
+
+
+
+
+          
+
+  /admin/users/{id}:
+    delete:
+      summary: Delete a user by ID
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deleted successfully
+
+  /admin/logs/{id}:
+    delete:
+      summary: Delete a wellness log by ID
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Wellness log deleted successfully
+    put:
+      summary: Update a wellness log
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mood:
+                  type: string
+                  example: ""
+                sleepHours:
+                  type: number
+                  example: 
+                steps:
+                  type: number
+                  example: 
+                notes:
+                  type: string
+                  example: ""
+      responses:
+        '200':
+          description: Wellness log updated successfully
