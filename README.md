@@ -40,6 +40,10 @@ dotenv for environment variables
 1
 cd wellness tracker
 
+For swagger setup run this commands in your directory
+npm install swagger-ui-express swagger-jsdoc
+
+
 2️⃣ Install dependencies
 npm install
 
@@ -52,6 +56,9 @@ npm install
     swagger-jsdoc
     swagger-ui-expre
     yamljs
+
+
+
 
 
 3️⃣ Setup .env file
