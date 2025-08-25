@@ -43,6 +43,17 @@ cd wellness tracker
 2️⃣ Install dependencies
 npm install
 
+    bcryptjs
+    dotenv
+    express
+    express-validator
+    jsonwebtoken
+    mongoose
+    swagger-jsdoc
+    swagger-ui-expre
+    yamljs
+
+
 3️⃣ Setup .env file
 
 Create a .env file in root:
@@ -104,14 +115,15 @@ Authorization: Bearer <your_token>
 Access user or admin routes.
 
 📂 Project Structure
-📦 wellness-tracker-backend
+📦 wellness tracker
  ┣ 📂 controllers
- ┃ ┣ authControllers.js
+ ┃ ┣ authController.js
  ┃ ┣ wellnessControllers.js
  ┃ ┗ adminControllers.js
  ┣ 📂 middleware
  ┃ ┗ authMiddleware.js
  ┣ 📂 models
+ ┃ ┣ isAdmin.js
  ┃ ┣ User.js
  ┃ ┗ WellnessLog.js
  ┣ 📂 routes
@@ -122,6 +134,9 @@ Access user or admin routes.
  ┣ server.js
  ┣ .env
  ┣ package.json
+ ┣ .gitignore
+ ┣ postman_collection.json
+ ┣ swagger.yaml
  ┗ README.md
 
 
@@ -138,5 +153,3 @@ swagger
 Swagger UI is available at: [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
 
 
-## Postman Collection
-Import the Postman collection from `/postman/WellnessTracker.postman_collection.json` to test the APIs.
